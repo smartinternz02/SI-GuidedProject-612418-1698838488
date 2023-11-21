@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Traffic Volume Estimation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap">
+  <style>
+    body {
+      background-image: url("https://images.wallpaperscraft.com/image/single/street_road_traffic_130216_3840x2400.jpg");
+      background-color: black;
+      color: white;
+      font-family: Poppins, sans-serif;
+      background-size: cover;
+    }
+    .login {
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 18px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input[type="number"] {
+      width: 94%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    img {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="login">
+    <h1>Traffic Volume Estimation</h1>
+    <form action="{{ url_for('predict')}}" method="post">
+      <h2>Please enter the following details</h2>
+      <label for="holiday">Holiday:</label>
+      <select id="holiday" name="holiday">
+        <option value ="" disabled selected hidden>Choose a Holiday</option>
+        <option value= 7>None</option>
+        <option value= 1>Columbus Day</option>
+        <option value= 10>Veterans Day</option>
+        <option value = 9>Thanksgiving Day</option>
+        <option value = 0>Christmas Day</option>
+        <option value = 6>New Years Day</option>
+        <option value = 11>Washingtons Birthday</option>
+        <option value = 5>Memorial Day</option>
+        <option value = 2>Independence Day</option>
+        <option value = 8>State Fair</option>
+        <option value = 3>Labor Day</option>
+        <option value = 4>Martin Luther King Jr Day</option>
+      </select><br>
+      <label>Temperature (in kelvin):</label>
+      <input type="number" name="temp" placeholder="Temperature" required="required"><br>
+      <label>Rain (in mm):</label>
+      <input type="number" min="0" max="1000" name="rain" placeholder="Rain" required="required"><br>
+      <label>Snow (in mm):</label>
+      <input type="number" min="0" max="15" name="snow" placeholder="Snow" required="required"><br>
+      <label for="weather">Weather:</label>
+      <select id="weather" name="weather">
+        <option value = "" disabled selected hidden>Choose a weather condition</option>
+        <option value = "1">Clouds</option>
+        <option value = "0">Clear</option>
+        <option value = 6>Rain</option>
+        <option value = 2>Drizzle</option>
+        <option value = 5>Mist</option>
+        <option value = 4>Haze</option>
+        <option value = 3>Fog</option>
+        <option value = 10>Thunderstorm</option>
+        <option value = 8>Snow</option>
+        <option value = 9>Squall</option>
+        <option value = 7>Smoke</option>
+      </select><br>
+      <label>Year:</label>
+      <input type="number" name="year" placeholder="Year" required="required"><br>
+      <label>Month:</label>
+      <select id="Month" name="Month">
+        <option value="" disabled selected hidden>Choose a month</option>
+        <option value= 1>January</option>
+        <option value= 2>February</option>
+        <option value = 3>March</option>
+        <option value = 4>April</option>
+        <option value = 5>May</option>
+        <option value = 6>June</option>
+        <option value = 7>July</option>
+        <option value = 8>August</option>
+        <option value = 9>September</option>
+        <option value = 10>October</option>
+        <option value = 11>November</option>
+        <option value = 12>December</option>
+      </select><br>
+      <label>Day (1-31):</label>
+      <input type="number" min="1" max="31" name="day" placeholder="Day" required="required"><br>
+      <label>Hours (0-24):</label>
+      <input type="number" min="0" max="24" name="Hours" placeholder="Hours" required="required"><br>
+      <label>Minutes:</label>
+      <input type="number" min="0" max="59" name="Minutes" placeholder="Minutes" required="required"><br>
+      <label>Seconds:</label>
+      <input type="number" min="0" max="59" name="Seconds" placeholder="Seconds" required="required"><br>
+      <button type="submit">Predict</button>
+    </form>
+    <p>{{ prediction_text }}</p>
+  </div>
+</body>
+</html>
